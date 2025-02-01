@@ -1,66 +1,153 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+Below is a suggested **README.md** draft for the Samlik Engineering CMS project. It covers the essentials—what the project is, how to install and run it locally, and an overview of its structure. Feel free to customise as needed.
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+---
 
-## About Laravel
+# Samlik Engineering CMS
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Samlik Engineering CMS is a content management system built with **Laravel 11**. It provides an organised platform for managing organisational information, project portfolios, and user access levels. The aim is to enable Samlik Engineering to update and maintain their web presence with minimal fuss.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Features
 
-## Learning Laravel
+- **Content Management**: Create, edit, and delete content such as welcome addresses, about us pages, and project galleries.
+- **User Authentication & Authorisation**: Secure login, role-based access control, and password recovery.
+- **Responsive Front-end**: Utilises Constrion Architecture for a modern and mobile-friendly interface.
+- **Clean Admin Dashboard**: Built with Argon Dashboard Master for easy management of users and content.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+---
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Technology Stack
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- **Framework**: [Laravel 11](https://laravel.com)
+- **PHP**: 8.2.12
+- **Server**: [XAMPP](https://www.apachefriends.org/)
+- **Front-end**: Constrion Architecture
+- **Back-end Dashboard**: Argon Dashboard Master
+- **Version Control**: Git
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Local Development Setup
 
-### Premium Partners
+Follow these steps to get the CMS running on your local machine:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+1. **Install XAMPP**  
+   Ensure you have a functioning XAMPP stack with Apache and MySQL services running.
+
+2. **Clone the Repository**  
+   ```bash
+   git clone https://github.com/trusted12001/samlik-cms.git
+   cd samlik-cms
+   ```
+
+3. **Install Dependencies**  
+   Use [Composer](https://getcomposer.org/) to install PHP dependencies:
+   ```bash
+   composer install
+   ```
+
+4. **Configure Environment**  
+   - Copy the example file:  
+     ```bash
+     cp .env.example .env
+     ```
+   - Update your `.env` file with database credentials and any mail settings.  
+   - Generate an application key:  
+     ```bash
+     php artisan key:generate
+     ```
+
+5. **Set Up the Database**  
+   - Create a new database (e.g. `samlik_engineering_db`) via phpMyAdmin or another MySQL tool.  
+   - Migrate tables and seed initial data (if any):  
+     ```bash
+     php artisan migrate
+     # php artisan db:seed  // If there is a seeder in the project
+     ```
+
+6. **Run the Development Server**  
+   ```bash
+   php artisan serve
+   ```
+   Visit `http://127.0.0.1:8000` to view the CMS homepage.
+
+---
+
+## Project Structure
+
+The core directories of interest are:
+
+```plaintext
+samlik-cms/
+├─ app/
+│  ├─ Console/
+│  ├─ Exceptions/
+│  ├─ Http/
+│  │  ├─ Controllers/
+│  │  ├─ Middleware/
+│  ├─ Models/
+│  └─ Providers/
+├─ config/
+├─ database/
+│  ├─ migrations/
+│  ├─ seeders/
+├─ public/
+│  ├─ argon/       # Argon Dashboard assets
+│  ├─ css/
+│  ├─ js/
+├─ resources/
+│  ├─ views/
+│  │  ├─ constrion/ # Public-facing pages
+│  │  └─ argon/     # Admin dashboard templates
+├─ routes/
+│  ├─ web.php       # Front-end routes
+│  ├─ api.php
+├─ .env
+├─ composer.json
+└─ package.json
+```
+
+- **app/Http/Controllers**: Houses controllers for handling requests.
+- **resources/views/constrion**: Front-end templates using Constrion Architecture.
+- **resources/views/argon**: Admin dashboard views based on Argon Dashboard.
+- **routes/web.php**: Defines most of the application’s routes.
+
+---
+
+## Usage
+
+1. **Log In / Register**  
+   - Once the server is running, visit the login page to sign in or register a new account.  
+   - An administrator account can manage roles and permissions from the back-end dashboard.
+
+2. **Manage Content**  
+   - Administrators (or users with the right role) can create, edit, or delete pages, galleries, and other site content.  
+   - Editors may have restricted privileges depending on the role setup.
+
+3. **Settings & Configurations**  
+   - Under the admin dashboard, you can manage general site settings, user roles, and other core configuration details.
+
+---
 
 ## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+1. **Fork the Repository** (if on a public repo).
+2. **Create a New Feature Branch** (`git checkout -b feature/your-feature`).
+3. **Commit Your Changes** (`git commit -m 'Add some feature'`).
+4. **Push to the Branch** (`git push origin feature/your-feature`).
+5. **Submit a Pull Request**.
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Licence
 
-## Security Vulnerabilities
+This project is proprietary to **Samlik Engineering**. For any usage or distribution outside the intended scope, please seek written approval.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
 
-## License
+## Contact
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+For enquiries or issues, please reach out to **Samlik Engineering** at the relevant contact channels provided in the system, or open an issue on the repository if it’s public.
+
+Happy coding!
