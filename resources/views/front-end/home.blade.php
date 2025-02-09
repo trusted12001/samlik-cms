@@ -35,56 +35,67 @@
     </section>
 
 
-    <section class="about">
-        <div class="container">
-                <div class="row">
-                    <div class="about-grid">
-                        <div class="col-md-6 wow fadeInUp" data-wow-duration="0.4s" data-wow-delay="0.4s">
-                            <div class="thumbnail">
-                             <img src="{{asset('constrion/assets/images/intro.jpg')}}" class="img-responsive hvr-glow" alt="about-3">
-                              <div class="caption">
-                                <h4 class="heading-line">Who we are</h4>
-                                <p>Samlik Engineering Services Ltd. was established as a fully indigenous company with a core focus on providing comprehensive consultancy services across various stages of project implementation within the following key engineering fields:</p>
-
-                              </div>
-                            </div>
+<!-- Dynamic About Section -->
+<section class="about">
+    <div class="container">
+        <div class="row">
+            <div class="about-grid">
+                <!-- Left Column: "Who we are" (Article 0) -->
+                <div class="col-md-6 wow fadeInUp" data-wow-duration="0.4s" data-wow-delay="0.4s">
+                    <div class="thumbnail">
+                        <img src="{{ asset('storage/' . $intro[0]->image) }}" class="img-responsive hvr-glow" alt="{{ $intro[0]->title }}">
+                        <div class="caption">
+                            <h4 class="heading-line">{{ $intro[0]->title }}</h4>
+                            <p>{{ $intro[0]->description }}</p>
                         </div>
-                        <div class="col-md-6 wow fadeInDown" data-wow-duration="0.4s" data-wow-delay="0.4s">
-                        <div role="tabpanel">
-
-                          <!-- Nav tabs -->
-                          <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation" class="active"><a href="#architecture" aria-controls="architecture" role="tab" data-toggle="tab">ELECTRICAL</a></li>
-                            <li role="presentation"><a href="#conception" aria-controls="conception" role="tab" data-toggle="tab">Mechanical</a></li>
-                            <li role="presentation"><a href="#rebuilding" aria-controls="rebuilding" role="tab" data-toggle="tab">Facility </a></li>
-                          </ul>
-
-                          <!-- Tab panes -->
-                          <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane fade active in" id="architecture">
-                                <h4>Electrical Engineering</h4>
-                                <p>Samlik Engineering Services specializes in comprehensive electrical solutions, encompassing Uninterrupted Power Supply Systems (UPS), rural and urban electrification projects, electrical lighting and power design and installation, and the analysis of electrical distribution networks and loads.</p>
-                                <img src="{{asset('constrion/assets/images/intro_electrical.jpg')}}" class="img-responsive hvr-glow" alt="about-3">
-                            </div>
-                            <div role="tabpanel" class="tab-pane fade" id="conception">
-                                <h4>Mechanical Engineering</h4>
-                                <p>Samlik Engineering Services offers a wide range of mechanical engineering solutions, including general plumbing, water supply systems, sewage treatment, HVAC, fire safety, and lift systems. We are committed to delivering innovative and efficient mechanical engineering solutions for diverse projects.</p>
-                                <img src="{{asset('constrion/assets/images/intro_mechanical.jpg')}}" class="img-responsive hvr-glow" alt="about-3">
-                            </div>
-                            <div role="tabpanel" class="tab-pane fade" id="rebuilding">
-                                <h4>Facility & Project Management</h4>
-                                <p>Samlik Engineering Services provides comprehensive project management solutions, including contract preparation, Bill of Quantities (BOQ) preparation, project monitoring, and feasibility studies. We ensure the successful and efficient execution of projects from inception to completion.</p>
-                                <img src="{{asset('constrion/assets/images/intro_facility.jpg')}}" class="img-responsive hvr-glow" alt="about-3">
-                            </div>
-                          </div>
-
-                        </div>
-                    </div>
                     </div>
                 </div>
+                <!-- Right Column: Tabbed Articles (Articles 1, 2, 3) -->
+                <div class="col-md-6 wow fadeInDown" data-wow-duration="0.4s" data-wow-delay="0.4s">
+                    <div role="tabpanel">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active">
+                                <a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab">
+                                    {{ $intro[1]->title }}
+                                </a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#tab2" aria-controls="tab2" role="tab" data-toggle="tab">
+                                    {{ $intro[2]->title }}
+                                </a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#tab3" aria-controls="tab3" role="tab" data-toggle="tab">
+                                    {{ $intro[3]->title }}
+                                </a>
+                            </li>
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane fade active in" id="tab1">
+                                <h4>{{ $intro[1]->title }}</h4>
+                                <p>{{ $intro[1]->description }}</p>
+                                <img src="{{ asset('storage/' . $intro[1]->image) }}" class="img-responsive hvr-glow" alt="{{ $intro[1]->title }}">
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="tab2">
+                                <h4>{{ $intro[2]->title }}</h4>
+                                <p>{{ $intro[2]->description }}</p>
+                                <img src="{{ asset('storage/' . $intro[2]->image) }}" class="img-responsive hvr-glow" alt="{{ $intro[2]->title }}">
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="tab3">
+                                <h4>{{ $intro[3]->title }}</h4>
+                                <p>{{ $intro[3]->description }}</p>
+                                <img src="{{ asset('storage/' . $intro[3]->image) }}" class="img-responsive hvr-glow" alt="{{ $intro[3]->title }}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Right Column -->
+            </div>
         </div>
-    </section>
-
-
+    </div>
+</section>
     <!-- Additional sections for content, portfolio, etc. -->
 @endsection
