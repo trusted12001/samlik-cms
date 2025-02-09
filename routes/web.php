@@ -5,6 +5,8 @@ use App\Http\Controllers\ResetPasswordController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Intro;
 use App\Models\Slider;
+use App\Models\About;
+
 
 // Home Page: Pass dynamic data for intro and slider sections
 Route::get('/', function () {
@@ -30,9 +32,35 @@ Route::get('/', function () {
     return view('front-end.home', compact('intro', 'sliders'));
 });
 
+
+Route::get('/about', function () {
+    $about = About::first();
+    if (!$about) {
+        $about = new About([
+            'image'       => 'intros/CdD7s4PImkqOjHTPafFFdTsffIuvrySIyYv9qM48.jpg',
+            'article'     => "Samlik Engineering Services is a leading indigenous engineering firm in Nigeria, dedicated to delivering innovative and cost-effective solutions across a broad spectrum of industries. Our approach is built on a commitment to excellence, driven by a team of specialists who are up to date with the latest technologies and engineering practices.
+
+            At Samlik Engineering Services, we believe that every project is unique. Our diverse teams specialize in different facets of engineering—from comprehensive electrical systems, including power distribution and lighting design, to robust mechanical solutions like HVAC and plumbing systems. We also excel in facility and project management, ensuring that every project is executed efficiently from inception to completion.
+
+            We understand that a one-size-fits-all approach does not work in today’s competitive market. That is why our consultancy services are tailored to meet the specific needs of each client, whether they are large multinational corporations or local enterprises. We leverage cutting-edge methodologies and thorough analysis of your business environment to deliver solutions that not only meet but exceed your expectations.
+
+            Our focus on innovation, precision, and customer satisfaction has established us as a trusted partner in the engineering sector. By blending technical expertise with creative problem-solving, Samlik Engineering Services transforms visions into reality—ensuring every project is completed with the highest standards of quality and efficiency.",
+            'service_list_left'  => "Electrical Engineering Services\nMechanical Engineering Services\nFacility management",
+            'service_list_right' => "Civi / Structural Engineering\nUninterrupted Power Supply System\nLift System Design",
+        ]);
+    }
+    return view('front-end.about', compact('about'));
+})->name('about');
+
+
+
+
 Route::get('/dashboard', function () {
     return view('back-end.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -77,5 +105,15 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
         'edit'    => 'intros.edit',
         'update'  => 'intros.update',
         'destroy' => 'intros.destroy',
+    ]);
+
+    // About management resource routes
+    Route::resource('admin/abouts', App\Http\Controllers\AboutController::class)->names([
+        'index'   => 'abouts.index',
+        'create'  => 'abouts.create',
+        'store'   => 'abouts.store',
+        'edit'    => 'abouts.edit',
+        'update'  => 'abouts.update',
+        'destroy' => 'abouts.destroy',
     ]);
 });

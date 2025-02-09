@@ -18,22 +18,22 @@
                         <a class="hvr-overline-from-center" href="{{ url('/') }}">Home</a>
                     </li>
                     <li>
-                        <a class="hvr-overline-from-center" href="{{ Route::has('about.index') ? route('about.index') : '#' }}">
+                        <a class="hvr-overline-from-center" href="{{ Route::has('about') ? route('about') : '#' }}">
                             About
                         </a>
                     </li>
                     <li>
-                        <a class="hvr-overline-from-center" href="{{ Route::has('services.index') ? route('services.index') : '#' }}">
+                        <a class="hvr-overline-from-center" href="{{ Route::has('services') ? route('services') : '#' }}">
                             Services
                         </a>
                     </li>
                     <li>
-                        <a class="hvr-overline-from-center" href="{{ Route::has('projects.index') ? route('projects.index') : '#' }}">
+                        <a class="hvr-overline-from-center" href="{{ Route::has('projects') ? route('projects') : '#' }}">
                             Projects
                         </a>
                     </li>
                     <li>
-                        <a class="hvr-overline-from-center" href="{{ Route::has('contact.index') ? route('contact.index') : '#' }}">
+                        <a class="hvr-overline-from-center" href="{{ Route::has('contact') ? route('contact') : '#' }}">
                             Contact
                         </a>
                     </li>

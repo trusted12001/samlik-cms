@@ -87,7 +87,7 @@
 
             <!-- About Menu -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ Route::has('about.index') ? route('about.index') : '#' }}">
+                <a class="nav-link" href="{{ Route::has('abouts.index') ? route('abouts.index') : '#' }}">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-world-2 text-dark text-sm opacity-10"></i>
                     </div>
