@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Intro;
 use App\Models\Slider;
 use App\Models\About;
+use App\Models\Service;
+use App\Models\Skill;
+
 
 
 // Home Page: Pass dynamic data for intro and slider sections
@@ -51,6 +54,14 @@ Route::get('/about', function () {
     }
     return view('front-end.about', compact('about'));
 })->name('about');
+
+
+
+Route::get('/services', function () {
+    $services = Service::all();
+    $skills   = Skill::all();
+    return view('front-end.services', compact('services', 'skills'));
+})->name('services');
 
 
 
@@ -116,4 +127,23 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
         'update'  => 'abouts.update',
         'destroy' => 'abouts.destroy',
     ]);
+
+    Route::resource('admin/services', App\Http\Controllers\ServiceController::class)->names([
+        'index'   => 'services.index',
+        'create'  => 'services.create',
+        'store'   => 'services.store',
+        'edit'    => 'services.edit',
+        'update'  => 'services.update',
+        'destroy' => 'services.destroy',
+    ]);
+
+    Route::resource('admin/skills', App\Http\Controllers\SkillController::class)->names([
+        'index'   => 'skills.index',
+        'create'  => 'skills.create',
+        'store'   => 'skills.store',
+        'edit'    => 'skills.edit',
+        'update'  => 'skills.update',
+        'destroy' => 'skills.destroy',
+    ]);
+
 });
