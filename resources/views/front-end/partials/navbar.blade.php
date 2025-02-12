@@ -14,28 +14,20 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right" id="menu">
-                    <li class="active">
+                    <li class="{{ request()->routeIs('home') ? 'active' : '' }}">
                         <a class="hvr-overline-from-center" href="{{ url('/') }}">Home</a>
                     </li>
-                    <li>
-                        <a class="hvr-overline-from-center" href="{{ Route::has('about') ? route('about') : '#' }}">
-                            About
-                        </a>
+                    <li class="{{ request()->routeIs('about') ? 'active' : '' }}">
+                        <a class="hvr-overline-from-center" href="{{ route('about') }}">About</a>
                     </li>
-                    <li>
-                        <a class="hvr-overline-from-center" href="{{ Route::has('services') ? route('services') : '#' }}">
-                            Services
-                        </a>
+                    <li class="{{ request()->routeIs('services') ? 'active' : '' }}">
+                        <a class="hvr-overline-from-center" href="{{ route('services') }}">Services</a>
                     </li>
-                    <li>
-                        <a class="hvr-overline-from-center" href="{{ Route::has('projects') ? route('projects') : '#' }}">
-                            Projects
-                        </a>
+                    <li class="{{ request()->routeIs('projects') ? 'active' : '' }}">
+                        <a class="hvr-overline-from-center" href="{{ route('projects') }}">Projects</a>
                     </li>
-                    <li>
-                        <a class="hvr-overline-from-center" href="{{ Route::has('contact') ? route('contact') : '#' }}">
-                            Contact
-                        </a>
+                    <li class="{{ request()->routeIs('contact') ? 'active' : '' }}">
+                        <a class="hvr-overline-from-center" href="{{ route('contact') }}">Contact</a>
                     </li>
                 </ul>
             </div>

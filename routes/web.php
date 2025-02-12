@@ -8,6 +8,10 @@ use App\Models\Slider;
 use App\Models\About;
 use App\Models\Service;
 use App\Models\Skill;
+use App\Models\Project;
+use App\Models\ContactInformation;
+use App\Models\Client;
+
 
 
 
@@ -33,7 +37,7 @@ Route::get('/', function () {
     $sliders = Slider::all();
 
     return view('front-end.home', compact('intro', 'sliders'));
-});
+})->name('home');;
 
 
 Route::get('/about', function () {
@@ -62,6 +66,21 @@ Route::get('/services', function () {
     $skills   = Skill::all();
     return view('front-end.services', compact('services', 'skills'));
 })->name('services');
+
+
+
+Route::get('/projects', function () {
+    $projects = Project::paginate(10);
+    return view('front-end.projects', compact('projects'));
+})->name('projects');
+
+
+
+Route::get('/contact', function () {
+    $contactInfo = ContactInformation::first();
+    $clients = Client::all();
+    return view('front-end.contact', compact('contactInfo', 'clients'));
+})->name('contact');
 
 
 
@@ -145,5 +164,36 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
         'update'  => 'skills.update',
         'destroy' => 'skills.destroy',
     ]);
+
+
+    Route::resource('admin/projects', App\Http\Controllers\ProjectController::class)->names([
+        'index'   => 'projects.index',
+        'create'  => 'projects.create',
+        'store'   => 'projects.store',
+        'edit'    => 'projects.edit',
+        'update'  => 'projects.update',
+        'destroy' => 'projects.destroy',
+    ]);
+
+
+    Route::resource('admin/contact', App\Http\Controllers\ContactInformationController::class)->names([
+        'index'   => 'contact.index',
+        'create'  => 'contact.create',
+        'store'   => 'contact.store',
+        'edit'    => 'contact.edit',
+        'update'  => 'contact.update',
+        'destroy' => 'contact.destroy',
+    ]);
+
+
+    Route::resource('admin/clients', App\Http\Controllers\ClientController::class)->names([
+        'index'   => 'clients.index',
+        'create'  => 'clients.create',
+        'store'   => 'clients.store',
+        'edit'    => 'clients.edit',
+        'update'  => 'clients.update',
+        'destroy' => 'clients.destroy',
+    ]);
+
 
 });

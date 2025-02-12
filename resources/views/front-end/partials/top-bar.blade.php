@@ -10,7 +10,7 @@
                     </li>
                     <li>
                         <a href="mailto:info@samlikengineering.com">
-                            <i class="fa fa-envelope-o fa-fw"></i> info@samlikengineering.com
+                            <i class="fa fa-envelope-o fa-fw"></i> info@samlik.com.ng
                         </a>
                     </li>
                 </ul>
