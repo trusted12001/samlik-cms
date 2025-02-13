@@ -12,9 +12,6 @@ use App\Models\Project;
 use App\Models\ContactInformation;
 use App\Models\Client;
 
-
-
-
 // Home Page: Pass dynamic data for intro and slider sections
 Route::get('/', function () {
     // Retrieve up to 4 intro records
@@ -37,9 +34,9 @@ Route::get('/', function () {
     $sliders = Slider::all();
 
     return view('front-end.home', compact('intro', 'sliders'));
-})->name('home');;
+})->name('home');
 
-
+// About page
 Route::get('/about', function () {
     $about = About::first();
     if (!$about) {
@@ -47,11 +44,11 @@ Route::get('/about', function () {
             'image'       => 'intros/CdD7s4PImkqOjHTPafFFdTsffIuvrySIyYv9qM48.jpg',
             'article'     => "Samlik Engineering Services is a leading indigenous engineering firm in Nigeria, dedicated to delivering innovative and cost-effective solutions across a broad spectrum of industries. Our approach is built on a commitment to excellence, driven by a team of specialists who are up to date with the latest technologies and engineering practices.
 
-            At Samlik Engineering Services, we believe that every project is unique. Our diverse teams specialize in different facets of engineering—from comprehensive electrical systems, including power distribution and lighting design, to robust mechanical solutions like HVAC and plumbing systems. We also excel in facility and project management, ensuring that every project is executed efficiently from inception to completion.
+At Samlik Engineering Services, we believe that every project is unique. Our diverse teams specialize in different facets of engineering—from comprehensive electrical systems, including power distribution and lighting design, to robust mechanical solutions like HVAC and plumbing systems. We also excel in facility and project management, ensuring that every project is executed efficiently from inception to completion.
 
-            We understand that a one-size-fits-all approach does not work in today’s competitive market. That is why our consultancy services are tailored to meet the specific needs of each client, whether they are large multinational corporations or local enterprises. We leverage cutting-edge methodologies and thorough analysis of your business environment to deliver solutions that not only meet but exceed your expectations.
+We understand that a one-size-fits-all approach does not work in today’s competitive market. That is why our consultancy services are tailored to meet the specific needs of each client, whether they are large multinational corporations or local enterprises. We leverage cutting-edge methodologies and thorough analysis of your business environment to deliver solutions that not only meet but exceed your expectations.
 
-            Our focus on innovation, precision, and customer satisfaction has established us as a trusted partner in the engineering sector. By blending technical expertise with creative problem-solving, Samlik Engineering Services transforms visions into reality—ensuring every project is completed with the highest standards of quality and efficiency.",
+Our focus on innovation, precision, and customer satisfaction has established us as a trusted partner in the engineering sector. By blending technical expertise with creative problem-solving, Samlik Engineering Services transforms visions into reality—ensuring every project is completed with the highest standards of quality and efficiency.",
             'service_list_left'  => "Electrical Engineering Services\nMechanical Engineering Services\nFacility management",
             'service_list_right' => "Civi / Structural Engineering\nUninterrupted Power Supply System\nLift System Design",
         ]);
@@ -59,38 +56,30 @@ Route::get('/about', function () {
     return view('front-end.about', compact('about'));
 })->name('about');
 
-
-
+// Services page
 Route::get('/services', function () {
     $services = Service::all();
     $skills   = Skill::all();
     return view('front-end.services', compact('services', 'skills'));
 })->name('services');
 
-
-
+// Projects page
 Route::get('/projects', function () {
     $projects = Project::paginate(10);
     return view('front-end.projects', compact('projects'));
 })->name('projects');
 
-
-
+// Contact page
 Route::get('/contact', function () {
     $contactInfo = ContactInformation::first();
     $clients = Client::all();
     return view('front-end.contact', compact('contactInfo', 'clients'));
 })->name('contact');
 
-
-
-
-Route::get('/dashboard', function () {
-    return view('back-end.dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-
-
+// Dashboard route now using AdminController to pass metrics
+Route::get('/dashboard', [App\Http\Controllers\AdminController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -100,6 +89,7 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
+// Admin group for back-end management
 Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.dashboard');
 
@@ -147,6 +137,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
         'destroy' => 'abouts.destroy',
     ]);
 
+    // Services management resource routes
     Route::resource('admin/services', App\Http\Controllers\ServiceController::class)->names([
         'index'   => 'services.index',
         'create'  => 'services.create',
@@ -156,6 +147,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
         'destroy' => 'services.destroy',
     ]);
 
+    // Skills management resource routes
     Route::resource('admin/skills', App\Http\Controllers\SkillController::class)->names([
         'index'   => 'skills.index',
         'create'  => 'skills.create',
@@ -165,7 +157,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
         'destroy' => 'skills.destroy',
     ]);
 
-
+    // Projects management resource routes
     Route::resource('admin/projects', App\Http\Controllers\ProjectController::class)->names([
         'index'   => 'projects.index',
         'create'  => 'projects.create',
@@ -175,7 +167,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
         'destroy' => 'projects.destroy',
     ]);
 
-
+    // Contact Information management resource routes
     Route::resource('admin/contact', App\Http\Controllers\ContactInformationController::class)->names([
         'index'   => 'contact.index',
         'create'  => 'contact.create',
@@ -185,7 +177,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
         'destroy' => 'contact.destroy',
     ]);
 
-
+    // Clients management resource routes
     Route::resource('admin/clients', App\Http\Controllers\ClientController::class)->names([
         'index'   => 'clients.index',
         'create'  => 'clients.create',
@@ -194,6 +186,4 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
         'update'  => 'clients.update',
         'destroy' => 'clients.destroy',
     ]);
-
-
 });
